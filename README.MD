@@ -1,5 +1,10 @@
 ﻿
-# MetaLens
+
+<p align="center">
+  <img src="./assets/icon.png" width="80"/>
+</p>
+
+<h1 align="center">MetaLens</h1>
 
 MetaLens is a lightweight Windows desktop tool built with WPF (.NET) for viewing images and extracting metadata (EXIF).
 
@@ -33,18 +38,18 @@ metadata-map.json
 - Fully editable without changing code  
 
 ### Example:
-
+```json
 {
   "Make": "Camera Brand",
   "Model": "Camera Model",
   "DateTimeOriginal": "Capture Date"
 }
-
+```
 ---
 
 ## 🖼 Preview
 
-![MetaLens Preview](images/preview.png)
+![MetaLens Preview](assets/preview.png)
 
 ---
 
@@ -60,7 +65,9 @@ metadata-map.json
 
 1. Clone repository:
 
+```bash
 git clone https://github.com/M3h245/MetaLens.git
+```
 
 2. Open solution in Visual Studio  
 3. Restore NuGet packages (if needed)  
@@ -76,6 +83,32 @@ git clone https://github.com/M3h245/MetaLens.git
 - Better drag & drop UX  
 - Performance optimization  
 - Advanced metadata engine  
+
+---
+## 🧭 Future Updates / Roadmap
+
+Planned improvements for upcoming versions of MetaLens:
+
+### 🧹 Metadata Management
+- Manual removal of individual metadata entries  
+- Selective deletion of metadata fields  
+
+### 🗂 Bulk Actions
+- Remove multiple metadata items at once  
+- Batch cleanup by category (EXIF groups)  
+- Quick "clear selected group" feature  
+
+### ⚡ UX Improvements
+- Faster metadata rendering for large image sets  
+- Improved drag & drop feedback  
+- Better selection handling in image list  
+
+### 📦 Export Features (Planned)
+- Export cleaned metadata to JSON  
+- Export to TXT / CSV formats  
+
+
+> These features are under active development and will be added in future releases.
 
 ---
 

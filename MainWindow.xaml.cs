@@ -27,8 +27,8 @@ public partial class MainWindow : Window
         InitializeComponent();
         Loaded += MainWindow_Loaded;
 
-        Images.Add(new ImageItem(@"C:\Images\Image1.png"));
-        Images.Add(new ImageItem(@"C:\Images\Image2.png"));
+        //Images.Add(new ImageItem(@"C:\Images\Image1.png"));
+        //Images.Add(new ImageItem(@"C:\Images\Image2.png"));
 
         _map = LoadMap();
         _categorizer = new MetadataCategorizer(_map);

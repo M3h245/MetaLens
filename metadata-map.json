@@ -1,0 +1,19 @@
+{
+  "Image Width": "General",
+  "Image Height": "General",
+  "File Name": "File",
+  "File Size": "File",
+
+  "Make": "Camera",
+  "Model": "Camera",
+  "ISO Speed Ratings": "Camera",
+  "F-Number": "Camera",
+  "Exposure Time": "Camera",
+  "Focal Length": "Camera",
+
+  "GPS Latitude": "GPS",
+  "GPS Longitude": "GPS",
+
+  "Prompt": "AI",
+  "Negative Prompt": "AI"
+}

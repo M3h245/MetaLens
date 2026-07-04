@@ -1,0 +1,193 @@
+﻿<Window x:Class="MetaLens.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MetaLens"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        mc:Ignorable="d"
+        Title="MetaLens"
+        Icon="icon.ico"
+        Height="450"
+        Width="800"
+        AllowDrop="True"
+        Drop="Window_Drop"
+        DragOver="Window_DragOver"
+        AllowsTransparency="False"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        Background="#1E1E1E"
+        WindowStartupLocation="CenterScreen">
+
+    <!-- 👇 این باید داخل Window باشه -->
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome
+            CaptionHeight="0"
+            ResizeBorderThickness="6"
+            GlassFrameThickness="0"
+            CornerRadius="0"
+            UseAeroCaptionButtons="False"/>
+    </shell:WindowChrome.WindowChrome>
+    <Window.Resources>
+
+        <!-- DARK SCROLLBAR -->
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="silver"/>
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="Opacity" Value="0.8"/>
+        </Style>
+    
+    </Window.Resources>
+
+
+    <Grid x:Name="RootGrid" Background="#1E1E1E" MouseDown="TitleBar_MouseDown">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="35"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--TitleBar-->
+        <Grid Grid.Row="0" Background="Transparent">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Image Source="icon.ico"
+                   Width="16"
+                   Height="16"
+                   Margin="10,0,5,0"
+                   VerticalAlignment="Center"/>
+                <!-- TITLE -->
+                <TextBlock Text="MetaLens"
+               VerticalAlignment="Center"
+               Margin="10,0,0,0"
+               Foreground="White"/>
+            </StackPanel>
+
+            <!-- BUTTONS -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+
+                <!-- MINIMIZE -->
+                <Button Width="40" Height="30"
+                Content="─"
+                Click="Minimize_Click"
+                Background="Transparent"
+                Foreground="White"
+                BorderThickness="0"
+                ToolTip="Minimize"/>
+
+                <!-- CLOSE -->
+                <Button Width="40" Height="30"
+                Content="✕"
+                Click="Close_Click"
+                Background="Transparent"
+                Foreground="White"
+                BorderThickness="0"
+                ToolTip="Close"/>
+
+            </StackPanel>
+
+        </Grid>
+        <!--Main AREA-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--LEFT PANEL:IMAGE LIST-->
+            <Border Grid.Column="0" Background="#2A2A2A" CornerRadius="8" Padding="10">
+                <DockPanel>
+                    <Button Content="Clear List"  ToolTip="Clear List" Height="26" Background="Transparent" DockPanel.Dock="Top" Foreground="White" Click="Clear_Click"/>
+
+                    <ListBox x:Name="ImageList"
+         Background="Transparent"
+         BorderThickness="0"
+         Foreground="White">
+
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+
+                        <ListBox.ItemTemplate>
+
+                            <DataTemplate>
+
+                                <Border Background="#333"
+                    CornerRadius="8"
+                    Margin="5"
+                    Padding="8">
+
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <!-- Thumbnail -->
+                                        <Image Width="60"
+                           Height="60"
+                           Margin="0,0,10,0"
+                           Source="{Binding FilePath}"
+                           Stretch="UniformToFill"/>
+
+                                        <!-- File Name -->
+                                        <TextBlock Text="{Binding FileName}"
+                               VerticalAlignment="Center"
+                               Foreground="White"/>
+
+                                    </StackPanel>
+
+                                </Border>
+
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+                </DockPanel>
+            </Border>
+            <!--SPLITTER-->
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Background="Gray"/>
+            <!--RIGHT PANEL:IMAGE DETAILS-->
+            <Border Grid.Column="2"
+        Background="#2A2A2A"
+        CornerRadius="8"
+        Padding="10">
+
+                <DockPanel>
+
+                    <!-- TOP BUTTON -->
+                    <Button 
+                        Content="Copy All ⧉"
+        Height="26"
+        Background="Transparent"
+        DockPanel.Dock="Top"
+        ToolTip="Copy"
+        Foreground="White"
+        Click="CopySingle_Click">
+                    </Button>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+              HorizontalScrollBarVisibility="Disabled">
+
+                        <StackPanel x:Name="MetadataPanel">
+
+                        
+
+                        </StackPanel>
+
+                    </ScrollViewer>
+
+                </DockPanel>
+
+            </Border>
+        </Grid>
+        <Border x:Name="DropOverlay"
+Background="#40FFFFFF"
+Visibility="Collapsed"
+Grid.RowSpan="2"
+Grid.ColumnSpan="3"
+DragLeave="DropOverlay_Leave"/>
+    </Grid>
+
+</Window>

@@ -44,7 +44,7 @@ metadata-map.json
 
 ## 🖼 Preview
 
-![MetaLens Preview](images/preview.png)
+![MetaLens Preview](assets/preview.png)
 
 ---
 

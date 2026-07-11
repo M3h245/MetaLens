@@ -66,13 +66,13 @@ public partial class MainWindow : Window
 
     private void AddMetadataRow(string key, string value)
     {
-        var row = new StackPanel
+        var rowGrid = new Grid
         {
-            Orientation = Orientation.Horizontal,
             Margin = new Thickness(0, 3, 0, 3)
         };
 
-
+        rowGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+        rowGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
         var btn = new Button
         {
@@ -82,8 +82,9 @@ public partial class MainWindow : Window
             Background = Brushes.Transparent,
             BorderBrush = Brushes.Transparent,
             Foreground = Brushes.White,
-            Padding = new Thickness(5,0 ,5,0),
-            Margin = new Thickness(0, 0, 5, 0)
+            Margin = new Thickness(0, 0, 5, 0),
+            VerticalAlignment = VerticalAlignment.Top
+
 
         };
 
@@ -92,14 +93,22 @@ public partial class MainWindow : Window
             Clipboard.SetText(value);
         };
 
-        row.Children.Add(btn);
-        row.Children.Add(new TextBlock
+        Grid.SetColumn(btn, 0);
+        rowGrid.Children.Add(btn);
+
+        var textBlock = new TextBlock
         {
             Text = $"{key}: {value}",
-            Width = 260,
-            Foreground = Brushes.White
-        });
-        MetadataPanel.Children.Add(row);
+            Foreground = Brushes.White,
+            Margin = new Thickness(0, 3, 0, 0),
+            TextWrapping = TextWrapping.Wrap, 
+            VerticalAlignment = VerticalAlignment.Top
+        };
+
+        Grid.SetColumn(textBlock, 1);
+        rowGrid.Children.Add(textBlock);
+
+        MetadataPanel.Children.Add(rowGrid);
     }
 
     private void CopySingle_Click(object sender, RoutedEventArgs e)

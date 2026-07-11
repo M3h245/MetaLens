@@ -1,0 +1,32 @@
+name: Auto Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest 
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.0'
+
+    - name: Publish WPF App
+      run: dotnet publish -c Release -r win-x64 --self-contained true -o ./publish
+
+    - name: Zip Release Artifacts
+      run: Compress-Archive -Path ./publish/* -DestinationPath ./MetaLens-Windows.zip
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: ./MetaLens-Windows.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
